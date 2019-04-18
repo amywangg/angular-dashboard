@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { from } from 'rxjs';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',

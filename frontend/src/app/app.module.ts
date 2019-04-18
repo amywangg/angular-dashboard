@@ -1,16 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PerformanceComponent } from './components/performance/performance.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import {
   MatAutocompleteModule,
@@ -44,7 +47,13 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
+  MatFormFieldModule,
 } from '@angular/material';
+import { FilesComponent } from './components/settings/files/files.component';
+import { FilesAddComponent } from './components/settings/files-add/files-add.component';
+import { FilesListComponent } from './components/settings/files-list/files-list.component';
+import { FilesEditComponent } from './components/settings/files-edit/files-edit.component';
+import { FileService } from './services/file.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +63,10 @@ import {
     AnalyticsComponent,
     SettingsComponent,
     PerformanceComponent,
-    SideNavComponent
+    FilesComponent,
+    FilesAddComponent,
+    FilesListComponent,
+    FilesEditComponent
   ],
   imports: [
     BrowserModule,
@@ -66,9 +78,31 @@ import {
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    MatCardModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule
   ],
-  providers: [],
+  providers: [FileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

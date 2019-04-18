@@ -2,7 +2,7 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="true" #start mode="side">
-    <mat-toolbar color="accent" style="color:white">Dashboard</mat-toolbar>
+    <mat-toolbar color="accent" >Dashboard</mat-toolbar>
     <mat-nav-list>
       <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
         <span class="full-width" *ngIf="isExpanded || isShowing">Log Dashboard</span>
@@ -11,11 +11,11 @@
         </mat-icon>
       </mat-list-item>
       <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-        <a mat-list-item href="..." routerLinkActive="current">Home</a>
-        <a mat-list-item href="..." routerLinkActive="current">Analytics</a>
-        <a mat-list-item href="..." routerLinkActive="current">Performance</a>
-        <a mat-list-item href="..." routerLinkActive="current">Alerts</a>
-        <a mat-list-item href="..." routerLinkActive="current">Settings</a>
+        <a mat-list-item routerLink="/" routerLinkActive="current"><i class="fas fa-home"></i>Home</a>
+        <a mat-list-item routerLink="/analytics" routerLinkActive="current"><i class="far fa-chart-bar"></i>Analytics</a>
+          <a mat-list-item routerLink="/performance" routerLinkActive="current"><i class="far fa-clock"></i>Performance</a>
+          <a mat-list-item routerLink="/alerts"routerLinkActive="current"><i class="far fa-bell"></i>Alerts</a>
+              <a mat-list-item routerLink="/settings/files" routerLinkActive="current"><i class="fas fa-cogs"></i>Settings</a>
       </div>
     </mat-nav-list>
   </mat-sidenav>
