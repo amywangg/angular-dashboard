@@ -1,51 +1,54 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FileService } from '../../../services/file.service';
-import { DataSource } from '@angular/cdk/collections';
-import { Observable } from 'rxjs';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { File } from '../file';
-import { Router } from '@angular/router';
+import { Observable, of,Subject } from 'rxjs';
+
+import { File } from '../file'; //gets the File class structure
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+const apiUrl = 'http://localhost:4000/files';
+
+class DataTablesResponse {
+  data: any[];
+  draw: number;
+  recordsFiltered: number;
+  recordsTotal: number;
+}
 
 @Component({
   selector: 'app-files-list',
   templateUrl: './files-list.component.html',
   styleUrls: ['./files-list.component.css']
 })
-export class FilesListComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
-  MyDataSource: any;
-  fileList: File[];
-  displayedColumns: string[] = ['name', 'path', 'application', 'server', 'updated_date'];
+export class FilesListComponent implements OnDestroy, OnInit {
 
-  constructor(private api: FileService, private router: Router) { }
 
-  ngOnInit() {
-    this.getFiles();
+  dtOptions: DataTables.Settings = {};
+  files: File[] = [];
+  dtTrigger: Subject<any> = new Subject();
+
+  constructor(private http: HttpClient, private api : FileService) {}
+  private extractData(res: Response) {
+    const body = res;
+    return body || {};
   }
+  ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 2
+    };
 
-  // To Get List Of Employee
-  getFiles() {
-    this.api
-      .getFiles()
-      .subscribe((data: File[]) => {
-        this.MyDataSource = new MatTableDataSource();
-        this.MyDataSource.data = data;
-        this.MyDataSource.paginator = this.paginator;
-        this.MyDataSource.sort = this.sort;
-      });
+    this.api.getFiles().subscribe(data => {
+      this.files = data;
+      this.dtTrigger.next();
+    })
+
   }
-
-  // To Edit Employee
-  editFile(id) {
-    this.router.navigate([`/files/edit/${id}`]);
-  }
-
-  // Search specific result
-  filterFile(searchstring: string) {
-    searchstring = searchstring.trim();
-    searchstring = searchstring.toLowerCase();
-    this.MyDataSource.filter = searchstring;
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 }

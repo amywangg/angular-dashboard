@@ -5,7 +5,9 @@
     <mat-icon>list</mat-icon>
   </a> -->
 
-  <form [formGroup]="fileForm" (ngSubmit)="onFormSubmit(fileForm.value)" accept=".log">
+  
+  <form [formGroup]="fileForm" (ngSubmit)="onFormSubmit(fileForm.value)" >
+      <input  type="file" id="file" (change)="onFileChange($event)" accept=".log"/>
 
     <!-- <input type="file" id="file" (change)="handleFileInput($event.target.files)"> -->
     <span>

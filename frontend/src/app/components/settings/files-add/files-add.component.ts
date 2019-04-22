@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators, ReactiveFormsModule } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -19,25 +19,23 @@ export class FilesAddComponent implements OnInit {
   applications: string[] = ['Fidelity.ca', 'AiWeb'];
   servers: string[] = ['Production', 'QA', 'Development'];
 
-  constructor(private router: Router, private api: FileService, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private api: FileService, private formBuilder: FormBuilder, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.fileForm = this.formBuilder.group({
+      nameControl: [null, Validators.required],
       pathControl: [null, Validators.required],
       appControl: [null, Validators.required],
-      serverControl: [null, Validators.required],
-      nameControl: [null, Validators.required]
+      serverControl: [null, Validators.required]
     });
   }
 
   onFormSubmit(form: NgForm) {
     console.log(this.fileForm);
 
-    if (this.fileForm.valid) {
+    if (this.fileForm.valid && $('#file').val()!='') {
       const data = this.fileForm.value;
-      this.api.postFile(data).subscribe(() => {
-        this.router.navigate(['settings/files']);
-      });
+      this.api.addFile(data);
     }
   }
 }

@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { DataTablesModule } from 'angular-datatables';
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 
 import {
   MatAutocompleteModule,
@@ -66,7 +68,8 @@ import { FileService } from './services/file.service';
     FilesComponent,
     FilesAddComponent,
     FilesListComponent,
-    FilesEditComponent
+    FilesEditComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,8 @@ import { FileService } from './services/file.service';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    DataTablesModule
   ],
   providers: [FileService],
   bootstrap: [AppComponent]
