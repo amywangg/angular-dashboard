@@ -14,8 +14,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// third party modules
 import { DataTablesModule } from 'angular-datatables';
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
+import { ChartsModule } from 'ng2-charts';
+import {NgbModule, NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {
   MatAutocompleteModule,
@@ -56,6 +59,9 @@ import { FilesAddComponent } from './components/settings/files-add/files-add.com
 import { FilesListComponent } from './components/settings/files-list/files-list.component';
 import { FilesEditComponent } from './components/settings/files-edit/files-edit.component';
 import { FileService } from './services/file.service';
+import { LoginBarComponent } from './components/analytics/login-bar/login-bar.component';
+import { MethodComponent } from './components/performance/method/method.component';
+import { CoreLogsComponent } from './components/home/core-logs/core-logs.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +75,10 @@ import { FileService } from './services/file.service';
     FilesAddComponent,
     FilesListComponent,
     FilesEditComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    LoginBarComponent,
+    MethodComponent,
+    CoreLogsComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +113,10 @@ import { FileService } from './services/file.service';
     FormsModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    DataTablesModule
+    DataTablesModule,
+    ChartsModule, 
+    MatMenuModule,
+    NgbPaginationModule, NgbAlertModule, NgbModule
   ],
   providers: [FileService],
   bootstrap: [AppComponent]

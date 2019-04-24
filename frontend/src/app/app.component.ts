@@ -1,16 +1,18 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {MatSidenav} from '@angular/material/sidenav';
 import * as angular from "angular";
+import {FileService} from '../app/services/file.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  
   @ViewChild('start') sidenav: MatSidenav;
   isExpanded = true;
   showSubmenu: boolean = true;
@@ -22,8 +24,19 @@ export class AppComponent {
     .pipe(
       map(result => result.matches)
     );
+    dtTrigger: Subject<any> = new Subject();
+    
+    constructor(private breakpointObserver: BreakpointObserver, private api: FileService ) {}
+    files: File[] = [];
 
-    constructor(private breakpointObserver: BreakpointObserver) {}
+  ngOnInit(): void {
+    this.api.getFiles().subscribe(data => {
+      this.files = data.name;
+      this.dtTrigger.next();
+    })
+  }
+
+    
     toggleSideNav(start: any) {
       this.sidenav.toggle();
   }

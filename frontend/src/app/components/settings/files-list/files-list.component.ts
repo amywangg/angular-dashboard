@@ -39,7 +39,7 @@ export class FilesListComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2
+      pageLength: 10
     };
 
     this.api.getFiles().subscribe(data => {

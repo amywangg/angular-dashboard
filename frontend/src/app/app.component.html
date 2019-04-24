@@ -2,7 +2,7 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="true" #start mode="side">
-    <mat-toolbar color="accent" >Dashboard</mat-toolbar>
+    <mat-toolbar color="accent">Dashboard</mat-toolbar>
     <mat-nav-list>
       <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
         <span class="full-width" *ngIf="isExpanded || isShowing">Log Dashboard</span>
@@ -12,20 +12,34 @@
       </mat-list-item>
       <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
         <a mat-list-item routerLink="/" routerLinkActive="current"><i class="fas fa-home"></i>Home</a>
-        <a mat-list-item routerLink="/analytics" routerLinkActive="current"><i class="far fa-chart-bar"></i>Analytics</a>
-          <a mat-list-item routerLink="/performance" routerLinkActive="current"><i class="far fa-clock"></i>Performance</a>
-          <a mat-list-item routerLink="/alerts"routerLinkActive="current"><i class="far fa-bell"></i>Alerts</a>
-              <a mat-list-item routerLink="/settings/files" routerLinkActive="current"><i class="fas fa-cogs"></i>Settings</a>
+        <a mat-list-item routerLink="/analytics" routerLinkActive="current"><i
+            class="far fa-chart-bar"></i>Analytics</a>
+        <a mat-list-item routerLink="/performance" routerLinkActive="current"><i
+            class="far fa-clock"></i>Performance</a>
+        <a mat-list-item routerLink="/alerts" routerLinkActive="current"><i class="far fa-bell"></i>Alerts</a>
+        <a mat-list-item routerLink="/settings/files" routerLinkActive="current"><i class="fas fa-cogs"></i>Settings</a>
       </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
+
+
     <mat-toolbar color="primary">
       <button mat-button type="button" aria-label="Toggle sidenav" (click)="toggleSideNav(start)">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>
-        <!-- put toolbar items here -->
+          
+
+            <mat-form-field  class="example-full-width" style="max-width:30vw; margin-right: 20px;">
+                <mat-label>Name</mat-label>
+                <select matNativeControl required>
+                    <mat-option *ngFor="let file of files" >
+                        {{file}}
+                      </mat-option>
+                </select>
+              </mat-form-field>
+          
       </span>
     </mat-toolbar>
     <!-- Add Content Here -->

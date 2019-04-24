@@ -48,3 +48,6 @@
   .current{
       color: accent;
   }
+  i{
+    margin-right: 10px;
+  }

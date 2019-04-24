@@ -19,3 +19,6 @@
   td{
      color: black;
   }
+  #DataTables_Table_0 > tbody > tr > td{
+     color:black;
+  }
